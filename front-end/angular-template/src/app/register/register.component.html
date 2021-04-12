@@ -1,0 +1,74 @@
+<div class="container col-9">
+  <h2>Registration form</h2>
+  <hr>
+
+  <div *ngIf="isPasswordsMatch">
+    <div class="alert alert-danger">Password and confirm password do not match</div>
+  </div>
+
+  <form name="form" (submit)=signup() #regForm="ngForm">
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Name" #name="ngModel"
+        [(ngModel)]="form.name" required>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors.required"><small class="alert text-danger">Name is required</small></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username" #username="ngModel"
+        [(ngModel)]="form.username" required>
+      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+        <div *ngIf="username.errors.required"><small class="alert text-danger">Username is required</small></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" #email="ngModel"
+        [(ngModel)]="form.email" required email>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required"><small class="alert text-danger">Email address is required</small></div>
+        <div *ngIf="email.errors.email"><small class="alert text-danger">Email must be a valid email address</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password1">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+        #password="ngModel" [(ngModel)]="form.password" required>
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required"><small class="alert text-danger">Password is required</small></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword1">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+        placeholder="Confirm password" #confirmPassword="ngModel" [(ngModel)]="form.confirmPassword" required>
+      <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+        <div *ngIf="confirmPassword.errors.required"><small class="alert text-danger">Confirm password is
+            required</small></div>
+
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <button [disabled]="regForm.invalid" type="submit" class="btn btn-primary">Register</button>
+      <div *ngIf="regForm.submitted && isSignedUpFailed" class="alert alert-warning">
+        Signup failed!<br />{{errorMessage}}
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="isSignedUp">
+    <div class="alert alert-info">Registration is successful.</div>
+    <br>
+    <a type="button" class="btn btn-primary" href="/login">Login</a>
+  </div>
+</div>

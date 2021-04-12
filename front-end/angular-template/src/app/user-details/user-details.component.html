@@ -1,0 +1,59 @@
+
+<h4>Account Details</h4>
+<hr>
+<div *ngIf="errorMessage">{{errorMessage}}</div>
+
+<form name="detailsForm" *ngIf="newUser" #detailsForm="ngForm" (submit)=save()>
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" placeholder="Name" name="name" #name="ngModel"
+        [(ngModel)]="newUser.name" required>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="name.errors.required"><small class="alert text-danger">Name is required</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="username" class="col-sm-2 col-form-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="username" placeholder="Username" name="username" #username="ngModel"
+        [(ngModel)]="newUser.username" required>
+      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+        <div *ngIf="username.errors.required"><small class="alert text-danger">Username is required</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Email" name="email" #email="ngModel"
+        [(ngModel)]="newUser.email" required>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required"><small class="alert text-danger">Email is required</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row" *ngIf="isAdmin()">
+    <div class="col-sm-2">Roles</div>
+    <div class="col-sm-10">
+      <div class="form-check" *ngFor="let role of roles">
+        <input class="form-check-input" type="checkbox" name="role" #role="ngModel"
+          [attr.disabled]="(role.name === 'USER' || role.name === 'ADMIN') ? true : null"
+          [ngModelOptions]="{standalone: true}" [(ngModel)]="role.checked">
+        <label class="form-check-label" for="{{role.name}}">
+          {{role.name}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-success">Save</button>
+    </div>
+  </div>
+</form>

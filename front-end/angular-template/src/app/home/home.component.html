@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div>
+      <h1>Welcome to {{title}}!</h1>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <div [hidden]="!isLoggedIn">
+      <p>Hello, <span>{{username}}</span>!</p>
+    </div>
+
+    <div [hidden]="isLoggedIn">
+      <a href="/login">Go ahead and login!</a>
+    </div>
+  </div>
+
+
+</div>

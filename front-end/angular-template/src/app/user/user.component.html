@@ -1,0 +1,40 @@
+<h4>Content from server</h4>
+
+<p>Content: {{content}}</p>
+<p>Error: {{errorMessage}}</p>
+
+<h4>Users</h4>
+<hr>
+
+<div>
+  <table id="users" class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of users; let counter = index" id="{{counter + 1}}">
+        <td>{{counter + 1}}</td>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.getRolesAsString()}}</td>
+        <td>
+          <button id="btn-edit" type="button"
+            class="btn btn-warning btn-sm" routerLinkActive="active" routerLink="/details/{{user.id}}">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+

@@ -1,0 +1,39 @@
+<h4>Roles</h4>
+<hr>
+
+<form class="form-inline" name="form" #roleForm="ngForm" (submit)=addNewRole()>
+    <label for="roleName">Enter role name:</label>
+    <input type="text" class="form-control ml-auto mr-auto" id="roleName" placeholder="New role name" name="roleName" #roleName="ngModel"
+      [(ngModel)]="form.roleName" required />
+    <div *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)">
+      <div *ngIf="roleName.errors.required"><small class="alert text-danger">Role name is required</small></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add new role</button>
+  </form>
+<br>
+
+<div>
+  <table id="roles" class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let role of roles; let counter = index" id="{{counter + 1}}">
+        <td>{{counter + 1}}</td>
+        <td>{{role.id}}</td>
+        <td>{{role.name}}</td>
+        <td>
+          <button id="btn-delete" [disabled]="role.name == 'ADMIN' || role.name == 'USER'" type="button"
+            class="btn btn-danger btn-sm" (click)=deleteRole(role.id)>Delete</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
